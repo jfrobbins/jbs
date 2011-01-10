@@ -1,0 +1,13 @@
+Jan 09 2011
+
+\a second post
+
+for #example!  
+article.top would contain only "1" in order to display this on the main page.
+
+truncation is below:
+
+<!--more-->
+
+that above was the truncation. this test should be hidden on the main site.
+

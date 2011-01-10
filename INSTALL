@@ -1,0 +1,20 @@
+you need to copy config.default.php to config.php, and edit it.
+
+then, do the following:
+
+make a directory "articles/".
+In articles/:
+  if you want to use comments, make a directory "comments". chmod 777 it.
+  if you want to use referer logging, make a directory "refers". chmod 777 it.
+  if yo uwant to use a counter, make a file "counter.txt". chmod 666 it.
+  make a new file called article.top, and put "0" in it.
+  make a file named "0", and put the following text in it:
+     November 11 2005 (or whatever the date is)
+     \The Title Of My First Post
+     and any other text you want
+
+  Later posts will be 1, 2, and so on, and article.top should be updated
+  accordingly. If the date is in the future, the article won't be visible
+  until that time.
+
+
