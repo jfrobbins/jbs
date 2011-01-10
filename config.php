@@ -125,7 +125,7 @@
     $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizalbe blogging system</font>';
       
     // set our text that goes below the blog
-      $jbs_bottomline = 'Copyright &copy; jon robbins : Powered by <a href="http://jrobb.org/jbs">jbs</a>';
+      $jbs_bottomline = 'Copyright &copy; jon robbins : Powered by <a href="http://jbs.jrobb.org/">jamba blog script</a>';
       if ($article != "rc")  // show links to rss and recent comments, if not already in recent comments
         $jbs_bottomline =  '<a href="rss.php">rss</a> : <a href="recent_comments.php">recent comments</a> : ' . $jbs_bottomline;
 
