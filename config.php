@@ -122,7 +122,7 @@
     // set our text that goes above the blog
     $jbs_topline = "<center><h2>" . '<font color="#CCCCCC">' . "<a href=\"$blogurl\">$blogname</a></font></h2></center>";
     //this is a quote or tagline that goes under the main heading:
-    $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizalbe blogging system</font>';
+    $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizable blogging system</font>';
       
     // set our text that goes below the blog
       $jbs_bottomline = 'Copyright &copy; jon robbins : Powered by <a href="http://jbs.jrobb.org/">jamba blog script</a>';
