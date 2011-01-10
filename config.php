@@ -1,5 +1,6 @@
 <?
 /*  jbs (jamba blog script) 
+ *  v0.1.0
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
@@ -15,13 +16,13 @@
   //*** basic configuration
   //********************************************************
     $blogname = "jamba blog script (jbs)";
-    $mainPage="http://jrobb.org/jbs/";
+    $mainPage="http://jbs.jrobb.org/";
     //$blogurl = $mainPage . "blog/";   // URL to main page  //for blog at "mysite/blog"
     $blogurl = $mainPage;   // URL to main page  //for blog at "mysite/"
     $staticPage = false;   // URL to main page  //for blog at "mysite/" with no static front page 
     //$staticPage = "main";   // URL to main page  //for blog at "mysite/" with static front page    
       //static page blog is not yet enabled
-    $blogurl_rel = "//jrobb.org/jbs/";    // URL in format for <LINK> tags, without any /index.php etc, just the path
+    $blogurl_rel = "//jbs.jrobb.org/";    // URL in format for <LINK> tags, without any /index.php etc, just the path
     
     $num_articles = 6;    // how many articles to show on front page
     $post_truncate_str = "<!--more-->"; //if this string occurs on main page (not single article), post will truncate.
