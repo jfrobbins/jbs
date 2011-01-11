@@ -268,7 +268,7 @@
         fputs($fp, $blah);
         fclose($fp);
       }
-      if (!($counter_echo === false)) echo "$counter_echo$blah";
+      if (!($counter_echo === false)) echo "<font size =1>$counter_echo$blah</font>";
     } 
   }
 

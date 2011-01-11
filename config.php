@@ -94,18 +94,18 @@
     $footer = '<font size =2><a href="http://creativecommons.org/licenses/by-sa/3.0/us/">';
     $footer .= "<img src=\"http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png\" border=0></a></font>"; // format bottom line like so
     $footer .= ' :: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7A422A9N8JTS"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border=0 title="help support the site and/or fix my jeep!" /></a>';
-    $footer .= " :: <a href=\"http://www.factorq.net\"><img src =\"../images/button.JPG\" border=0></a>";
+    $footer .= " :: <a href=\"http://www.factorq.net\"><img src =\"http://factorq.net/images/button.JPG\" border=0></a>";
 
     $center_article = 0;	// whether to <center> articles
     $jbs_article_date_column_width = "95"; // width of left "date" column, can be in pixels, or percentage i.e. 10%
 
-    // form configuration for search form and comment form
+  // form configuration for search form and comment form
     $jbs_formconfig =
        '<style type="text/css"> .myform { border-top:#c0c0c0 solid thin; border-bottom:#c0c0c0 solid thin; ' .
        'border-right:#c0c0c0 solid thin; border-left:#c0c0c0 solid thin; color:#f0f0f0; ' .
        'background:#303040; font-family:Courier; font-size:12px; border-width:1px; } </style>';
 
-    //browser icon:
+  //browser icon:
     $faviconPath="http://jrobb.org/images/favicon.ico"; //default is 16x16
                                                         //set to "" to not use
     if (!($faviconPath=="")) {
@@ -116,29 +116,29 @@
       $favicon ="";
     }
 
-    // outer (border) table configuration -- set to false to disable border
+  // outer (border) table configuration -- set to false to disable border
     $jbs_outer_table = 'border=0 CELLPADDING=4 CELLSPACING=0 HEIGHT=90% WIDTH=90% bgcolor="#A8A8A8" bordercolor="#000000"';
 
-    // set our text that goes above the blog
+  // set our text that goes above the blog
     $jbs_topline = "<center><h2>" . '<font color="#CCCCCC">' . "<a href=\"$blogurl\">$blogname</a></font></h2></center>";
-    //this is a quote or tagline that goes under the main heading:
+  //this is a quote or tagline that goes under the main heading:
     $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizable blogging system</font>';
       
-    // set our text that goes below the blog
+  // set our text that goes below the blog
       $jbs_bottomline = 'Copyright &copy; jon robbins : Powered by <a href="http://jbs.jrobb.org/">jamba blog script</a>';
       if ($article != "rc")  // show links to rss and recent comments, if not already in recent comments
         $jbs_bottomline =  '<a href="rss.php">rss</a> : <a href="recent_comments.php">recent comments</a> : ' . $jbs_bottomline;
 
       $jbs_bottomline = "<center><font size=-1>$jbs_bottomline</font></center>";
 
-    //apply footer
-      $jbs_bottomline_end = $jbs_bottomline_end . "<br><center>" .  $footer . "</center>";
+  //apply footer
+      $jbs_bottomline_end = "<br><center>" .  $footer . "</center>";
 
-    // comments appearances
+  // comments appearances
       $comments_dispsep = "<hr>"; // separate comments
       $comments_datestr = "D d M Y \\a\\t H:i"; //see http://php.net/manual/en/function.date.php
 
-    // navigation controls text and formatting
+  // navigation controls text and formatting
       $nav_maxviewpages=15; // max pages to show
  
       $nav_preprevlink = "<center><font size=\"-1\">[ ";
@@ -152,7 +152,7 @@
       $nav_oldsearchresults = "older results...";
       $nav_newsearchresults = "newer results...";
 
-    // search box settings
+  // search box settings
       $display_search="always"; // set to "always", "index", or anything else to disable
       $nav_searchfmt="<br><br><center>";
       $nav_searchfmt_end="</center>";
@@ -174,9 +174,9 @@
     $refer_maxdispsize=60; // show this many chars of URL max
     $refer_maxitems=15;    // show this many URLs max (shows only the oldest to deter spam)
 
-    // ignore links containing these values
-    // note that the ignoring happens when the link happens, so it will not ignore items
-    // already in the referer list (you will have to manually delete any)
+  // ignore links containing these values
+  // note that the ignoring happens when the link happens, so it will not ignore items
+  // already in the referer list (you will have to manually delete any)
     $refer_ignorelist = array("http://www.factorq.net",
 							"http://jrob.org",
 							"http://www.jrob.org",
@@ -191,44 +191,44 @@
   //********************************************************
 
   // if request is from rss or palm, or user-agent has PalmOS or Nokia, disable border, search box
-  $is_palm = strstr(($useragent = $_SERVER['HTTP_USER_AGENT']), "PalmOS") || strstr($useragent, "Nokia") || $_REQUEST['palm']=="y";
-  if ($is_palm || $_REQUEST['fromrss'] == "y")
-  {
-    $jbs_outer_table=false;
-    $display_search = "never";
-  }
+    $is_palm = strstr(($useragent = $_SERVER['HTTP_USER_AGENT']), "PalmOS") || strstr($useragent, "Nokia") || $_REQUEST['palm']=="y";
+    if ($is_palm || $_REQUEST['fromrss'] == "y")
+    {
+      $jbs_outer_table=false;
+      $display_search = "never";
+    }
 
-  if ($article != "rc") // normal RSS embed link
-    $rss_embedlinkrel = "<LINK REL=\"alternate\" TITLE=\"$blogname RSS\" " . 
-                        "HREF=\"$blogurl_rel" . "rss.php\" TYPE=\"application/rss+xml\">";
-  else  // recent comments page embed link
-    $rss_embedlinkrel = "<LINK REL=\"alternate\" TITLE=\"$blogname Recent Comments RSS\" " . 
-                        "HREF=\"$blogurl_rel" . "recent_comments.php?rss=y\" TYPE=\"application/rss+xml\">";
+    if ($article != "rc") // normal RSS embed link
+      $rss_embedlinkrel = "<LINK REL=\"alternate\" TITLE=\"$blogname RSS\" " . 
+                          "HREF=\"$blogurl_rel" . "rss.php\" TYPE=\"application/rss+xml\">";
+    else  // recent comments page embed link
+      $rss_embedlinkrel = "<LINK REL=\"alternate\" TITLE=\"$blogname Recent Comments RSS\" " . 
+                          "HREF=\"$blogurl_rel" . "recent_comments.php?rss=y\" TYPE=\"application/rss+xml\">";
 
   //some customization/format for the top
-  $jbs_topline .= "<table width=90% align='center'><tr><td valign=bottom align=right>";
-  $jbs_topline .= $jbs_tagline;
-  $jbs_topline .= "</td></tr></table>";
+    $jbs_topline .= "<table width=90% align='center'><tr><td valign=bottom align=right>";
+    $jbs_topline .= $jbs_tagline;
+    $jbs_topline .= "</td></tr></table>";
 
-  $jbs_pretext = "<head><title>$blogname</title>$jbs_formconfig $favicon</head>\n<body $jbs_bodyconfig>\n$rss_embedlinkrel\n$jbs_topline\n";
-  if (!($jbs_outer_table === false)){
-	  $jbs_pretext .= "<center><table $jbs_outer_table><tr>";
-	  if (!($menuFile===false)) {
-      $jbs_pretext .= '<td valign="top" width=17% cellpadding=0><table width=100% cellpadding=0 valign="top">
-							<tr valign="top">';
-      $jbs_pretext .= '<td width=100% align="left" valign="top" bgcolor=#CCCCCC>' . "\n<h2>Menu:</h2>" . "\n";
-      $jbs_pretext .= filegetcontents($menuFile); 
-      $jbs_pretext .= '</td>
-							</tr>
-							<tr bgcolor="#6F6F6F"></tr>
-						 </table></td>';
-	  }
-	  $jbs_pretext .= "<td valign=top>\n";	  
-  }
+    $jbs_pretext = "<head><title>$blogname</title>$jbs_formconfig $favicon</head>\n<body $jbs_bodyconfig>\n$rss_embedlinkrel\n$jbs_topline\n";
+    if (!($jbs_outer_table === false)){
+      $jbs_pretext .= "<center><table $jbs_outer_table><tr>";
+      if (!($menuFile===false)) {
+        $jbs_pretext .= '<td valign="top" width=17% cellpadding=0><table width=100% cellpadding=0 valign="top">
+                <tr valign="top">';
+        $jbs_pretext .= '<td width=100% align="left" valign="top" bgcolor=#CCCCCC>' . "\n<h2>Menu:</h2>" . "\n";
+        $jbs_pretext .= filegetcontents($menuFile); 
+        $jbs_pretext .= '</td>
+                </tr>
+                <tr bgcolor="#6F6F6F"></tr>
+               </table></td>';
+      }
+      $jbs_pretext .= "<td valign=top>\n";	  
+    }
 
   // delimit comment files with this (only change if you have no comments in your comments dir)
-  $comments_sep = "::!us-constitution-rocks!::"; // how to delimit the comments in file form
+    $comments_sep = "::!us-constitution-rocks!::"; // how to delimit the comments in file form
 
-  if (!is_dir($config_path)) die("hl-- configuration path not found.");
+    if (!is_dir($config_path)) die("jbs configuration path not found.");
 
 ?>
