@@ -272,5 +272,8 @@
     } 
   }
 
-  echo "$jbs_bottomline_end</body>";
+  echo "$jbs_bottomline_end";
+  if ($adStuff != "")
+     echo $adStuff;
+  echo "\n</body>";
 ?>
