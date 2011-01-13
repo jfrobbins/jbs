@@ -11,3 +11,67 @@ truncation is below:
 
 that above was the truncation. this test should be hidden on the main site.
 
+
+this is a test of raw html blah pre style, using my bash update/sync script as an example:
+
+[code]
+  #!/bin/bash
+
+  SRCDIR=$HOME/Documents/jon/src/jbs
+  REMOTEDIR=$HOME/Documents/jon/jbs_remote/public
+
+  echo "enter mode: s=sync, b=build, t=testing"
+  read mode
+
+  if [ "$mode" = "b" ]; then
+    echo "Enter the number of the release (0.1): "
+    read version
+    echo "Enter the revision of this release: (99)"
+    read rev
+    echo "the version is : $version.$rev"
+
+    LReleaseDir=$SRCDIR/release/$version
+    RReleaseDir=$REMOTEDIR/release/$version
+
+    if [ -d $LReleaseDir ]; then
+      echo "Directory exists"
+    else 
+      mkdir $LReleaseDir
+    fi
+    if [ -d $RReleaseDir ]; then
+      echo "Directory exists"
+    else 
+      mkdir $RReleaseDir
+    fi
+
+    #create tar.gz:
+    tar -pczf $LReleaseDir/jbs_$version.$rev.tar.gz --exclude-vcs --exclude='release' $SRCDIR/*
+    md5sum $LReleaseDir/jbs_$version.$rev.tar.gz > $LReleaseDir/jbs_$version.$rev.tar.gz.md5
+
+  else
+    if [ "$mode" = "t" ]; then
+      #sync up to testing directory
+      REMOTEDIR=$HOME/Documents/jon/jbs_remote/public/test
+    fi
+  fi
+
+  echo "src : $SRCDIR/"
+  echo "dest: $REMOTEDIR"
+  #sync the drives:
+  if [ "$mode" = "t" ]; then
+    rsync -vzutmrl $SRCDIR/ $REMOTEDIR/ --exclude .git release
+  else
+    rsync -vzutmrl $SRCDIR/ $REMOTEDIR/ --exclude .git
+  fi
+  echo "done"
+
+[/code]
+
+
+and here is another test with some html:
+
+[code]
+  <a href="http://www.factorq.net">factorq.net</a>
+  <P>
+  <P>
+[/code]

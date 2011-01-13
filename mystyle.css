@@ -45,5 +45,11 @@ h1 {
   font-family: Helvetica, Geneva, Arial,
         SunSans-Regular, sans-serif }
 
+pre.code {
+  color: #076300;
+  font-family: "Courier New", Courier, monospace;
+  font-style: italic;
+  font-size: 7pt;
+}
 -->
 </STYLE> 

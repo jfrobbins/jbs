@@ -559,6 +559,24 @@ function LinkAllPostTags($contents, $linktagstr=true) {
   return $contents;      
 }
 
+function codifyPost($contents) {
+  $codeword = "code";
+  
+  if (strpos(trim($contents),"[$codeword]") !== false) 
+    $contents = str_replace("[$codeword]" ,'<table width=80%>
+                                              <tr>
+                                                <td><pre class="code">', $contents);
+  if (strpos(trim($contents),"[/$codeword]") !== false) 
+    $contents = str_replace("[/$codeword]" ,'</pre>
+                                              </td>
+                                              </tr>
+                                              </table>', $contents);
+    
+  //$str=eregi_replace("<pre>","",$str); //wtf?
+  //$str=eregi_replace("</pre>","",$str);
+  return $contents;
+}
+
 function display_article($article_parm, $adone, $show_full=false)
   {
     global $article_dir, $viewstart;
@@ -646,9 +664,9 @@ function display_article($article_parm, $adone, $show_full=false)
           break;
           }
         } else {
-        }       
-       $str=eregi_replace("<pre>","",$str);
-       $str=eregi_replace("</pre>","",$str);
+        }  
+             
+       $str=codifyPost($str);
 
        if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<p>$str" ;
 
