@@ -3,6 +3,13 @@ Jan 13 2011
 \Rev History
 
 <hr>
+<h3>v0.1.2 -- testing/in progress</h3>
+<ul>
+	<li>external css stylesheet</li>
+	<li>option for ad at bottom of page</li>
+</ul>
+
+<hr>
 <h3>v0.1.1 -- initial release</h3>
 practically just hl-- plus:
 <ul>
