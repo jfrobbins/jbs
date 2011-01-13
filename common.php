@@ -603,12 +603,13 @@ function display_article($article_parm, $adone, $show_full=false)
 
     // process article
     $last_empty=1;
+    echo "<font size=2>";
     while ($firstline != "" || ($str = fgets($fp, 4096)) !== false) 
     {
       // recycle first line if they put a topic there
       if ($firstline != "") $str = $firstline;
       $firstline = "";
-// new topic
+      // new topic
       if (substr($str, 0, 1) == "\\") 
       {
        if (substr($str, 0, 2) == "\\\\") 
@@ -622,7 +623,7 @@ function display_article($article_parm, $adone, $show_full=false)
          $link1="";
          $link2="";
          if (!$show_full) { $link2="</a>"; $link1="<a href=\"?article=$article_parm\">"; }
-         echo "<font size=+2><b>$link1" . $str . "$link2</b></font><p>\n";		
+         echo "<font size=+2><b>$link1" . $str . "$link2</b></font></a><p>\n";		
        }
      } 
      else 
@@ -653,11 +654,10 @@ function display_article($article_parm, $adone, $show_full=false)
 
        $str=eregi_replace("<img src.*>",'\\0<p>',$str);
 
-       echo "<font size=2>";//JR set blog text font size here!
        echo $str;
-       echo "</font>";
      }
    }
+   echo "</font>";
    fclose($fp);
 
    if ($center_article) echo "</center>";   
