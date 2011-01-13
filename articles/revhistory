@@ -1,0 +1,17 @@
+Jan 13 2011
+
+\Rev History
+
+<hr>
+<h3>v0.1.1 -- initial release</h3>
+practically just hl-- plus:
+<ul>
+	<li>Tag page</li>
+	<li>in-post Tag links</li>
+	<li>in-post Tag links in rss feed</li>
+	<li>Comment captcha (thanks <a hre="http://jezra.net">@jezra</a></li>
+	<li>comment email notification</li>
+	<li>text article names (not just 0,1,2 etc)</li>
+</ul>
+<hr>
+<br>
