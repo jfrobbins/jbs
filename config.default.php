@@ -1,6 +1,6 @@
 <?
 /*  jbs (jamba blog script) 
- *  v0.1.0
+ *  v0.1.2
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
@@ -31,7 +31,7 @@
     
     $menuFile = "menu.htm"; //use menu text/html file (ie. "../content/menu.htm")
     //$menuFile = ""; //no menu file
-    
+    $styleSheet = "mystyle.css";  //stylesheet, if you wish to use one. otherwise comment out
 
   //********************************************************
   //*** comments
@@ -120,7 +120,7 @@
     $jbs_outer_table = 'border=0 CELLPADDING=4 CELLSPACING=0 HEIGHT=90% WIDTH=90% bgcolor="#A8A8A8" bordercolor="#000000"';
 
   // set our text that goes above the blog
-    $jbs_topline = "<center><h2>" . '<font color="#CCCCCC">' . "<a href=\"$blogurl\">$blogname</a></font></h2></center>";
+    $jbs_topline = "<center><h1><a class='top' href=\"$blogurl\">$blogname</a></font></h1></center>";
   //this is a quote or tagline that goes under the main heading:
     $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizable blogging system</font>';
       
@@ -183,7 +183,21 @@
 							"http://factorq.net",
                            0); // 0 terminated list
 
-
+  //********************************************************
+  //*** add stuff to display at the bottom
+  //********************************************************
+    //just comment out if you don't want to use this! 
+    $adStuff = '<center><script type="text/javascript"><!--
+            google_ad_client = "ca-pub-2775682770358114";
+            /* fq2_fullbanner */
+            google_ad_slot = "8027410380";
+            google_ad_width = 468;
+            google_ad_height = 60;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script></center>';
 
   //********************************************************
   //*** internal stuff - no need to edit unless you are a 
@@ -210,7 +224,11 @@
     $jbs_topline .= $jbs_tagline;
     $jbs_topline .= "</td></tr></table>";
 
-    $jbs_pretext = "<head><title>$blogname</title>$jbs_formconfig $favicon</head>\n<body $jbs_bodyconfig>\n$rss_embedlinkrel\n$jbs_topline\n";
+    $jbs_pretext = "<head><title>$blogname</title>$jbs_formconfig $favicon\n";
+    if ($styleSheet != "")
+      $jbs_pretext .= '<link rel="stylesheet" type="text/css" href="' . $styleSheet . '" />' . "\n";
+    $jbs_pretext .= "</head>\n <body $jbs_bodyconfig>\n$rss_embedlinkrel\n$jbs_topline\n";
+    
     if (!($jbs_outer_table === false)){
       $jbs_pretext .= "<center><table $jbs_outer_table><tr>";
       if (!($menuFile===false)) {
