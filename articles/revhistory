@@ -3,11 +3,12 @@ Jan 13 2011
 \Rev History
 
 <hr>
-<b>v0.1.2 -- testing/in progress</b>
+<b>v0.1.2 -- style and bugfixes</b>
 <br>new features:
 <ul>
 	<li>external css stylesheet</li>
 	<li>option for ad at bottom of page</li>
+  <li>some other stuff</li>
 </ul>
 bug fixes:
 <ul>
