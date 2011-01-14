@@ -1,8 +1,8 @@
-Jan 09 2011
+Jan 13 2011
 
 \hello from jbs
 
-jamba blog script v0.0.1
+jamba blog script v0.2.0
 
 jbs is a simplistic,fully hackable and customizable php blog script<br>
 by Jon Robbins (based on <a href="http://www.cockos.com/hl--/">hl--</a>, which was based on <a href="http://badmofo.org/hlscript/">hlscript</a>)
