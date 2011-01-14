@@ -589,15 +589,15 @@ function codifyPost($contents, &$codeword) {
   switch ($codeword) {
   case "code":
     if ($isStart) {
-      $contents = str_replace("[$codeword]" ,'<table width=80%>
+      $contents = str_replace("[$codeword]" ,'<center><table width=75%>
                                                 <tr>
-                                                  <td><pre class="code">', $contents);
+                                                  <td align="left"><pre class="code">', $contents);
     } else {
       if ($isStop) {
         $contents = str_replace("[/$codeword]" ,'</pre>
                                                   </td>
                                                   </tr>
-                                                  </table>', $contents);
+                                                  </table></center>', $contents);
         $codeword="";
       } else {
         //just get rid of the characters

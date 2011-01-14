@@ -40,7 +40,8 @@ by Jon Robbins (based on <a href="http://www.cockos.com/hl--/">hl--</a>, which w
   <li>\ at the beginning of a line denotes a topic. Each topic is boldfaced, and has a permalink generated for it automatically. </li>
   <li>"< !--more-- >" (without the spaces) designates a truncation for the main page, with a "read more" link</li>
   <li>Blank lines are automatically spaced out with < P ></li>
-  <li>see this file ("0") or the next ("1") for an example</li>
+  <li>bracketed code tags to display html and other code</li>
+  <li>see this file ("0") or the <a href="?article=1">next ("1")</a> for an example</li>
 </ul>
 
 

@@ -2,7 +2,7 @@ Jan 09 2011
 
 \a second post
 
-for #example!  
+for example!
 article.top would contain only "1" in order to display this on the main page.
 
 truncation is below:
@@ -12,7 +12,7 @@ truncation is below:
 that above was the truncation. this test should be hidden on the main site.
 
 
-this is a test of raw html blah pre style, using my bash update/sync script as an example:
+this is a test of raw html pre style with code tags, using my bash update/sync script as an example:
 
 [code]
   #!/bin/bash
