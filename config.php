@@ -1,6 +1,6 @@
 <?
 /*  jbs (jamba blog script) 
- *  v0.1.2
+ *  v0.2.0
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
