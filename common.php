@@ -10,6 +10,8 @@
 */
 require_once("config.php");
 
+$codeWords = array("code");
+
 function get_param($param_name)
 {
   global $HTTP_POST_VARS;
@@ -559,19 +561,61 @@ function LinkAllPostTags($contents, $linktagstr=true) {
   return $contents;      
 }
 
-function codifyPost($contents) {
-  $codeword = "code";
-  
-  if (strpos(trim($contents),"[$codeword]") !== false) 
-    $contents = str_replace("[$codeword]" ,'<table width=80%>
-                                              <tr>
-                                                <td><pre class="code">', $contents);
-  if (strpos(trim($contents),"[/$codeword]") !== false) 
-    $contents = str_replace("[/$codeword]" ,'</pre>
-                                              </td>
-                                              </tr>
-                                              </table>', $contents);
+function codeWordStart($str) { 
+  //check for codewords
+  global $codeWords
+  $L_side = "[";
+  $R_side = "]";
     
+  for($x = 0; $x < count($codeWords); $x ++)    
+      if (strpos($str,$L_side . $codeWords[$x] . $R_side) !== false) {
+          return $codeWords[$x]; //return the codeword
+      }
+  return false;
+}
+
+function noCodeWordStop($str, $cw="") { 
+  //check for codeword stop
+  $L_side = "[/";
+  $R_side = "]";
+    
+    if (strpos($str,$L_side . $cw . $R_side) !== false) {
+        return false; //return the codeword
+    }
+  return true;
+}
+
+function codifyPost($contents, $codeword) {
+  if (strpos(trim($contents),"[$codeword]") !== false) 
+    $isStart=true
+  else
+    $isStart=false;
+  endif
+  if (strpos(trim($contents),"[/$codeword]") !== false) 
+    $isStop=true
+  else
+    $isStop=false;
+  endif
+  
+  switch ($codeword) {
+  case "code":
+    if ($isStart) {
+      $contents = str_replace("[$codeword]" ,'<table width=80%>
+                                                <tr>
+                                                  <td><pre class="code">', $contents);
+    } else {
+      if ($isStop) {
+        $contents = str_replace("[/$codeword]" ,'</pre>
+                                                  </td>
+                                                  </tr>
+                                                  </table>', $contents);
+      } else {
+        //just get rid of the characters
+        $contents = htmlentities($contents);
+      }
+    }
+    break;
+  }
   //$str=eregi_replace("<pre>","",$str); //wtf?
   //$str=eregi_replace("</pre>","",$str);
   return $contents;
@@ -621,7 +665,9 @@ function display_article($article_parm, $adone, $show_full=false)
 
     // process article
     $last_empty=1;
-    echo "<font size=2>";
+    $curr_codeword="";
+    $cw_ON = false;
+    echo "<font size=2>"; //font size for post
     while ($firstline != "" || ($str = fgets($fp, 4096)) !== false) 
     {
       // recycle first line if they put a topic there
@@ -646,34 +692,44 @@ function display_article($article_parm, $adone, $show_full=false)
      } 
      else 
      {
-       if (rtrim($str) == "")
+      if (($curr_codeword == "") or ($cw_ON===false)) {
+        $curr_codeword = codeWordStart($str); //check for start
+        if ($curr_codeword != "") $cw_ON = true;
+      } else {
+          $cw_ON = noCodeWordStop($str,$curr_codeword); //check for stop
+          if ($cw_ON === false) $curr_codeword ="";
+      }
+       if ((rtrim($str) == "") and ($curr_codeword == ""))
        {
          if (!$last_empty) $str="<p>";
          else $last_empty=1;
        }
        else $last_empty=0;
-             
-      $str=LinkAllPostTags($str, false); //link the tags
+      
+      if (!($cw_ON))       
+        $str=LinkAllPostTags($str, false); //link the tags
       
       //JR 2011.01.03 (for printing excertps only!)
-       if(!$show_full)
-       {
-        if (strpos(rtrim($str),"<!--more-->") !== false)
-        {
-          echo "<P>" . $link1 . "[Read More]" . $link2;
-          break;
-          }
-        } else {
-        }  
+     if((!$show_full) and (!$cw_ON))
+     {
+      if (strpos(rtrim($str),"<!--more-->") !== false)
+      {
+        echo "<P>" . $link1 . "[Read More]" . $link2;
+        break;
+        }
+      } else {
+      }  
              
-       $str=codifyPost($str);
-
-       if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<p>$str" ;
-
-       $str=eregi_replace("<img src.*>",'\\0<p>',$str);
-
-       echo $str;
-     }
+      if ($cw_ON) {      
+        $str=codifyPost($str, $curr_codeword);
+        
+      } else {
+        if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<p>$str" ;
+        $str=eregi_replace("<img src.*>",'\\0<p>',$str);
+      }
+      
+      echo $str;
+    }
    }
    echo "</font>";
    fclose($fp);
