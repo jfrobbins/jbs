@@ -167,6 +167,7 @@ function getLastInt($str) {
 
 function createCaptcha() {
   // creates captcha problem and stores along with answer in SESSION vars
+  //Thanks to @jezra for this:  http://www.jezra.net/blog/creating_a_CAPTCHA
 	
 	$ip_address = VISITORS_IP; //get the visitors IP address
 	$appended_ip = $ip_address + date("zB"); //append the numeric day of the year + 	Swatch Internet time to the ip_address
