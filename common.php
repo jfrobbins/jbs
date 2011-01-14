@@ -563,7 +563,7 @@ function LinkAllPostTags($contents, $linktagstr=true) {
 
 function codeWordStart($str) { 
   //check for codewords
-  global $codeWords
+  global $codeWords;
   $L_side = "[";
   $R_side = "]";
     
@@ -574,28 +574,17 @@ function codeWordStart($str) {
   return false;
 }
 
-function noCodeWordStop($str, $cw="") { 
-  //check for codeword stop
-  $L_side = "[/";
-  $R_side = "]";
-    
-    if (strpos($str,$L_side . $cw . $R_side) !== false) {
-        return false; //return the codeword
-    }
-  return true;
-}
-
-function codifyPost($contents, $codeword) {
+function codifyPost($contents, &$codeword) {
   if (strpos(trim($contents),"[$codeword]") !== false) 
-    $isStart=true
+    $isStart=true;
   else
     $isStart=false;
-  endif
+
   if (strpos(trim($contents),"[/$codeword]") !== false) 
-    $isStop=true
+    $isStop=true;
   else
     $isStop=false;
-  endif
+
   
   switch ($codeword) {
   case "code":
@@ -609,6 +598,7 @@ function codifyPost($contents, $codeword) {
                                                   </td>
                                                   </tr>
                                                   </table>', $contents);
+        $codeword="";
       } else {
         //just get rid of the characters
         $contents = htmlentities($contents);
@@ -695,9 +685,6 @@ function display_article($article_parm, $adone, $show_full=false)
       if (($curr_codeword == "") or ($cw_ON===false)) {
         $curr_codeword = codeWordStart($str); //check for start
         if ($curr_codeword != "") $cw_ON = true;
-      } else {
-          $cw_ON = noCodeWordStop($str,$curr_codeword); //check for stop
-          if ($cw_ON === false) $curr_codeword ="";
       }
        if ((rtrim($str) == "") and ($curr_codeword == ""))
        {
@@ -722,7 +709,7 @@ function display_article($article_parm, $adone, $show_full=false)
              
       if ($cw_ON) {      
         $str=codifyPost($str, $curr_codeword);
-        
+        if ($curr_codeword == "") $cw_ON = false; //update if changed
       } else {
         if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<p>$str" ;
         $str=eregi_replace("<img src.*>",'\\0<p>',$str);
