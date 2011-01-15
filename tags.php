@@ -161,5 +161,8 @@
     } 
   }
 
-  echo "$jbs_bottomline_end</body>";
+  echo "$jbs_bottomline_end";
+  if ($postFooter != "")
+     echo $postFooter;
+  echo "\n</body>";
 ?>

@@ -273,7 +273,7 @@
   }
 
   echo "$jbs_bottomline_end";
-  if ($adStuff != "")
-     echo $adStuff;
+  if ($postFooter != "")
+     echo $postFooter;
   echo "\n</body>";
 ?>

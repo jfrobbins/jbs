@@ -1,6 +1,6 @@
 <?
 /*  jbs (jamba blog script) 
- *  v0.1.2
+ *  v0.2.0
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
@@ -184,20 +184,22 @@
                            0); // 0 terminated list
 
   //********************************************************
-  //*** add stuff to display at the bottom
+  //*** add stuff to display at the bottom, below the normal footer (ie. google adsense ads)
   //********************************************************
     //just comment out if you don't want to use this! 
-    $adStuff = '<center><script type="text/javascript"><!--
-            google_ad_client = "ca-pub-2775682770358114";
-            /* fq2_fullbanner */
-            google_ad_slot = "8027410380";
-            google_ad_width = 468;
-            google_ad_height = 60;
-            //-->
-            </script>
-            <script type="text/javascript"
-            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-            </script></center>';
+    $postFooter = "<center>";
+    $postFooter .= '<script type="text/javascript"><!--
+                  google_ad_client = "ca-pub-2775682770358114";
+                  /* leaderboard-gray-txt */
+                  google_ad_slot = "2068879191";
+                  google_ad_width = 728;
+                  google_ad_height = 90;
+                  //-->
+                  </script>
+                  <script type="text/javascript"
+                  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+                  </script>';
+    $postFooter .= "</center>";
 
   //********************************************************
   //*** internal stuff - no need to edit unless you are a 
