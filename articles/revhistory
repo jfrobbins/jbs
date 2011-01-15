@@ -3,10 +3,14 @@ Jan 13 2011
 \Rev History
 
 <hr>
-<b>v0.2.0 -- courvoisier</b>
+<b>v0.2.1 -- courvoisier</b>
 <br>new features:
 <ul>
   <li>code tags supported to display html etc</li>
+</ul>
+bug fixes:
+<ul>
+  <li>fix some rss flow with the code tags</li>
 </ul>
 
 <hr>

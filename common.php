@@ -360,33 +360,45 @@ function comments_getcommentlink($article)
     if ($center_article) $ret .= "<center>";
 
     $last_empty=1;
+    $curr_codeword="";
+    $cw_ON = false;
     while (($str = fgets($fp, 1024)) !== false) {
       $shortenThis = false;
       if ((strpos(rtrim($str),$post_truncate_) !== false) and ($rss_truncate_more>0))
       {
         $shortenThis = true;
       }  
-      $str = LinkAllPostTags($str,false); //link the article tags
+      if (($curr_codeword == "") or ($cw_ON===false)) {
+        $curr_codeword = codeWordStart($str); //check for start
+        if ($curr_codeword != "") $cw_ON = true;
+      }
+
+      if (!($cw_ON))      
+        $str = LinkAllPostTags($str,false); //link the article tags
       $str = str_replace("\r", "", $str);	// lame, should be trim
 
       $str=config_rss_fixstr($str);
 
-      if (rtrim($str) == "")
+      if ((rtrim($str) == "") and ($curr_codeword==""))
       {
         if (!$last_empty) $str="<p>";
         else $last_empty=1;
       }
       else $last_empty=0;
 
-      $str=eregi_replace("<pre>","",$str);
-      $str=eregi_replace("</pre>","",$str);
+      //$str=eregi_replace("<pre>","",$str); //don't need this.
+      //$str=eregi_replace("</pre>","",$str);
 
-      if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+')
-      {
-          $str = "<p>$str" ;
+      if ($cw_ON) {      
+        $str=codifyPost($str, $curr_codeword);
+        if ($curr_codeword == "") $cw_ON = false; //update if changed
+      } else {
+        if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+')
+        {
+            $str = "<p>$str" ;
+        }
+        $str=eregi_replace("<img src.*>",'\\0<p>',$str);
       }
-
-      $str=eregi_replace("<img src.*>",'\\0<p>',$str);
 
       if (substr($str, 0, 1) == "\\") break;
       $ret .= $str;
