@@ -88,13 +88,6 @@
   //*** appearance configuration
   //********************************************************
     $jbs_bodyconfig='bgcolor="#6F6F6F" text="#000000" link="#030EA2" alink="#0C36FC" vlink="#0011E6"'; // any custom color settings for the <body> tag
-    
-    //this is whatever you want to appear at the bottom of the page, can be blank;
-    //$footer=""; //blank
-    $footer = '<font size =2><a href="http://creativecommons.org/licenses/by-sa/3.0/us/">';
-    $footer .= "<img src=\"http://i.creativecommons.org/l/by-sa/3.0/us/88x31.png\" border=0></a></font>"; // format bottom line like so
-    $footer .= ' :: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q7A422A9N8JTS"><img src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border=0 title="help support the site and/or fix my jeep!" /></a>';
-    $footer .= " :: <a href=\"http://www.factorq.net\"><img src =\"http://factorq.net/images/button.JPG\" border=0></a>";
 
     $center_article = 0;	// whether to <center> articles
     $jbs_article_date_column_width = "95"; // width of left "date" column, can be in pixels, or percentage i.e. 10%
@@ -119,8 +112,10 @@
   // outer (border) table configuration -- set to false to disable border
     $jbs_outer_table = 'border=0 CELLPADDING=4 CELLSPACING=0 HEIGHT=90% WIDTH=90% bgcolor="#A8A8A8" bordercolor="#000000"';
 
-  // set our text that goes above the blog
-    $jbs_topline = "<center><h1><a class='top' href=\"$blogurl\">$blogname</a></font></h1></center>";
+  // set our text that goes above the blog    
+    $jbs_topline = "<center><a class='top' href=\"$blogurl\">$blogname</a></center>";
+    $jbs_topline = '<div id="top"><b><font class="tophdr">' . $jbs_topline . '</font></b></div>';
+    
   //this is a quote or tagline that goes under the main heading:
     $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizable blogging system</font>';
       
@@ -130,9 +125,17 @@
         $jbs_bottomline =  '<a href="rss.php">rss</a> : <a href="recent_comments.php">recent comments</a> : ' . $jbs_bottomline;
 
       $jbs_bottomline = "<center><font size=-1>$jbs_bottomline</font></center>";
+      
+  //this is whatever you want to appear at the bottom of the page after $jbs_bottomline, can be blank;
+    //$footer="\n<hr>\n"; //blank
 
   //apply footer
-      $jbs_bottomline_end = "<br><center>" .  $footer . "</center>";
+    if ($footer) 
+      $jbs_bottomline_end = "<table width=90% align='center'>
+                               <tr>
+                                 <td>$footer</td>
+                               </tr>
+                             </table>";
 
   // comments appearances
       $comments_dispsep = "<hr>"; // separate comments
@@ -187,20 +190,8 @@
   //*** add stuff to display at the bottom, below the normal footer (ie. google adsense ads)
   //********************************************************
     //just comment out if you don't want to use this! 
-    $postFooter = "<br><center>";
-    $postFooter .= '<script type="text/javascript"><!--
-                  google_ad_client = "ca-pub-2775682770358114";
-                  /* leaderboard-gray-txt */
-                  google_ad_slot = "2068879191";
-                  google_ad_width = 728;
-                  google_ad_height = 90;
-                  //-->
-                  </script>
-                  <script type="text/javascript"
-                  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-                  </script>';
-    $postFooter .= "</center>";
-
+    //$postFooter = "<br><center></center>";
+    
   //********************************************************
   //*** internal stuff - no need to edit unless you are a 
   //***                  real control freak
