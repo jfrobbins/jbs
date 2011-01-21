@@ -97,6 +97,18 @@
        '<style type="text/css"> .myform { border-top:#c0c0c0 solid thin; border-bottom:#c0c0c0 solid thin; ' .
        'border-right:#c0c0c0 solid thin; border-left:#c0c0c0 solid thin; color:#f0f0f0; ' .
        'background:#303040; font-family:Courier; font-size:12px; border-width:1px; } </style>';
+    //I'm going to add some more stuff for a flattr button:
+    $jbs_formconfig .= "\n" . '<script type="text/javascript">
+                                /* <![CDATA[ */
+                                    (function() {
+                                        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
+                                        s.type = 'text/javascript';
+                                        s.async = true;
+                                        s.src = "http://api.flattr.com/js/0.6/load.js?mode=auto";
+                                        t.parentNode.insertBefore(s, t);
+                                    })();
+                                /* ]]> */
+                                </script>';
 
   //browser icon:
     $faviconPath="http://jrobb.org/images/favicon.ico"; //default is 16x16

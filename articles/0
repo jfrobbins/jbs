@@ -62,5 +62,9 @@ this is <a href="?article=license">free software</a> : share, adapt, and enjoy!
   <li>All tags can be displayed in on the <a href="tags.php">Tags page</a></li>
 </ul>
 
+<center>
+<a class="FlattrButton" style="display:none;"
+href="http://jbs.jrobb.org"></a>
+</center>
 
 Tags: #tags #site #jbs #php
