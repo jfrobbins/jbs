@@ -11,6 +11,7 @@ body {
     font-family: Georgia, "Times New Roman",
         Times, serif;
     color: #000000;
+    text-align: center;
     }
 #top .tophdr {
   font-size: 20pt;
@@ -51,5 +52,129 @@ pre.code {
   font-style: italic;
   font-size: 7pt;
 }
+
+table.main {
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: none;
+	border-color: black;
+	border-collapse: separate;
+	background-color: rgb(168, 168, 168);
+	height: 90%;
+	width: 90%;
+	margin-left:auto; 
+	margin-right:auto;
+}
+table.main th {
+	border-width: 1px;
+	padding: 4px;
+	border-style: none;
+	border-color: black;
+	background-color: ;
+	-moz-border-radius: ;
+}
+table.main td {
+	border-width: 1px;
+	padding: 4px;
+	border-style: none;
+	border-color: black;
+	background-color: ;
+	-moz-border-radius: ;
+}
+
+table.innermain {
+	border-width: 2px;
+	border-spacing: 2px;
+	border-style: none;
+	border-color: black;
+	border-collapse: separate;
+	background-color: rgb(168, 168, 168);
+	width: 90%;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+table.innermain td {
+	border-width: 1px;
+	padding: 2px;
+	border-style: none;
+	border-color: black;
+	background-color: ;
+	-moz-border-radius: ;
+	text-align: right;
+	margin-top: 0;
+	margin-bottom: auto;
+}
+
+td.menuouter {
+	width: 17%;
+	height: 90%;
+	text-align: left;
+	border-width: 0px;
+	padding: 1px;
+	border-style: none;
+	border-color: black;
+	background-color: #CCCCCC;
+	-moz-border-radius: ;
+	margin-top: 0;
+	margin-bottom: auto;
+}
+
+table.menu {
+	border-width: 0px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: black;
+	border-collapse: separate;
+	background-color: rgb(168, 168, 168);
+	width: 100%;
+	margin-left:auto; 
+	margin-right:auto;
+}
+
+table.menu td {
+	width: 100%;
+	border-width: 1px;
+	padding: 0px;
+	border-style: none;
+	border-color: black;
+	background-color: #CCCCCC;
+	-moz-border-radius: ;
+	text-align: left;
+	margin-top: 0;
+	margin-bottom: auto;
+}
+
+table.footer {
+	text-align: center;
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: none;
+	border-color: black;
+	border-collapse: separate;
+	background-color: rgb(168, 168, 168);
+	width: 90%;
+	margin-left:auto; 
+	margin-right:auto;
+}
+table.footer th {
+	border-width: 1px;
+	padding: 4px;
+	border-style: none;
+	border-color: black;
+	background-color: ;
+	-moz-border-radius: ;
+}
+table.footer td {
+	border-width: 1px;
+	padding: 4px;
+	border-style: none;
+	border-color: black;
+	background-color: ;
+	-moz-border-radius: ;
+}
+
+
+
 -->
 </STYLE> 

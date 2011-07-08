@@ -1,6 +1,6 @@
 <?php
-/*  jbs (jamba blog script) 
- * 
+/*  jbs (jrobb blog script) 
+ *  
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
  *    please see LICENSE file
@@ -10,7 +10,7 @@
 */
 require_once("config.php");
 
-$codeWords = array("code");
+$codeWords = array("code","list","html");
 
 function get_param($param_name)
 {
@@ -602,15 +602,10 @@ function codifyPost($contents, &$codeword) {
   switch ($codeword) {
   case "code":
     if ($isStart) {
-      $contents = str_replace("[$codeword]" ,'<center><table width=75%>
-                                                <tr>
-                                                  <td align="left"><pre class="code">', $contents);
+      $contents = str_replace("[$codeword]" ,'<center><table width="75%">' . "\n<tr><td align=\"left\">\n<pre class=\"code\">\n", $contents);
     } else {
       if ($isStop) {
-        $contents = str_replace("[/$codeword]" ,'</pre>
-                                                  </td>
-                                                  </tr>
-                                                  </table></center>', $contents);
+        $contents = str_replace("[/$codeword]" ,"</pre>\n</td></tr>\n</table>\n</center>\n", $contents);
         $codeword="";
       } else {
         //just get rid of the characters
@@ -618,6 +613,36 @@ function codifyPost($contents, &$codeword) {
       }
     }
     break;
+  case "list":
+	$contents = trim($contents);
+	if ($isStart) {
+		$contents = str_replace("[$codeword]" ,"<ul>",$contents);
+	} else {
+		if ($isStop) {
+			$contents = str_replace("[/$codeword]" ,"</ul>",$contents);
+			$codeword="";
+		} else {
+			//first character is new list item
+			if (substr($contents,0,2)=="* ") //can handle "* " leading items, or just new line separations
+				//$contents = str_replace("* ","",$contents);
+				$contents = substr($contents,1,strlen($contents)-2);
+			if ((strpos($contents,"<li>")) || (strpos($contents,"</li>"))) {
+				$contents = str_replace("<li>","",$contents);
+				$contents = str_replace("</li>","",$contents);
+			}
+			$contents = "<li>" . "<font class=\"post\">" . $contents . "</font>" . "</li>";
+		}
+	}
+	break;
+  case "html":
+	if ($isStart) {
+		$contents = str_replace("[$codeword]" ,"",$contents);
+	} else if ($isStop) {
+		$contents = str_replace("[/$codeword]" ,"",$contents);
+	} else {
+		//no changes, just use raw html with no formatting
+	}
+	break;
   }
   //$str=eregi_replace("<pre>","",$str); //wtf?
   //$str=eregi_replace("</pre>","",$str);
@@ -650,15 +675,16 @@ function display_article($article_parm, $adone, $show_full=false)
         echo "</td></tr>\n";
       }
 
-      echo "<tr><td width=\"$hls_article_date_column_width\" valign=top><b>";
+      echo "<tr><td width=\"$jbs_article_date_column_width\" valign=top>";
 
       if (substr($firstline, 0, 1) != "\\") 
       {
         echo $firstline;
         $r = strtotime($firstline);
         if ($r !== -1 && $r !== 0) {
-          echo "<br><center><font face=\"courier\" size=\"-1\">". 
-          strtolower(strftime("%A", $r)) . "</font></center>\n";
+          echo "<br><b><font face=\"courier\" size=\"-1\">". 
+          strtolower(strftime("%A", $r)) . "</font>\n";
+          echo "</b>\n";
         }
         $firstline = "";
       }
@@ -670,7 +696,6 @@ function display_article($article_parm, $adone, $show_full=false)
     $last_empty=1;
     $curr_codeword="";
     $cw_ON = false;
-    echo "<font size=2>"; //font size for post
     while ($firstline != "" || ($str = fgets($fp, 4096)) !== false) 
     {
       // recycle first line if they put a topic there
@@ -686,11 +711,17 @@ function display_article($article_parm, $adone, $show_full=false)
        else 
        {
          $str = trim(substr($str, 1));	// trim off \ and \n
-         echo "<a name=\"art$article_parm\">";
          $link1="";
          $link2="";
-         if (!$show_full) { $link2="</a>"; $link1="<a href=\"?article=$article_parm\">"; }
-         echo "<font size=+2><b>$link1" . $str . "$link2</b></font></a><p>\n";		
+         if (!$show_full) 
+         { 
+			$link1="<a href=\"?article=$article_parm\" name=\"art$article_parm\">"; 
+			$link2="</a>"; 
+		 } else {
+			$link1="<a name=\"art$article_parm\">";
+			$link2="</a>";
+		 }
+         echo "<font size=\"+2\"><b>$link1" . $str . "$link2</b></font><br>\n<br>\n";		
        }
      } 
      else 
@@ -701,7 +732,10 @@ function display_article($article_parm, $adone, $show_full=false)
       }
        if ((rtrim($str) == "") and ($curr_codeword == ""))
        {
-         if (!$last_empty) $str="<p>";
+         if (!$last_empty) {
+			 $str="";
+			 echo "<P>\n";
+		 }
          else $last_empty=1;
        }
        else $last_empty=0;
@@ -724,14 +758,17 @@ function display_article($article_parm, $adone, $show_full=false)
         $str=codifyPost($str, $curr_codeword);
         if ($curr_codeword == "") $cw_ON = false; //update if changed
       } else {
-        if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<p>$str" ;
+        if (substr(ltrim($str),0,1) == "*" || substr(ltrim($str),0,1) == '+') $str = "<br>$str" ;
         $str=eregi_replace("<img src.*>",'\\0<p>',$str);
       }
-      
-      echo $str;
+
+	  if (($str != "") && (!$curr_codeword) && (trim($str) != "</ul>")) {
+		$str= '<font class="post">' . $str . "</font>";
+	  }
+	  
+	  echo "$str\n";
     }
    }
-   echo "</font>";
    fclose($fp);
 
    if ($center_article) echo "</center>";   

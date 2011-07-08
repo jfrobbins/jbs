@@ -1,6 +1,18 @@
-Jan 13 2011
+July 08 2011
 
 \Rev History
+<hr>
+<b>v0.3.0 </b>
+<br>new features:
+[list]
+	added "list" codeword for un-ordered lists
+	added "html" codeword for allowing raw html
+[/list]
+<br>bug fixes:
+[list]
+	mostly w3c html compliant : <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fjbs.jrobb.org%2F&charset=%28detect+automatically%29&doctype=Inline&group=0&user-agent=W3C_Validator%2F1.2">checker</a>. a few pages still need to be gone through, though.
+	CSS fixes/straightening up of the formatting for further w3c compliance and easier maintenance
+[/list]
 
 <hr>
 <b>v0.2.1 -- courvoisier</b>

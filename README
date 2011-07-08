@@ -3,6 +3,10 @@ hl-- was it, but it was lacking in features and had not been maintained for a fe
 
 This is the software that I use on my blog, and although I don't update it very often, I try to add new things from time to time.
 
+BBcode type syntax is somewhat supported:
+	[code][/code]
+	[list][/list]
+	[html][/html]
 
 Jon
 http://jrobb.org

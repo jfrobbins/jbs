@@ -1,5 +1,5 @@
 <?
-/*  jbs (jamba blog script) 
+/*  jbs (jrobb blog script) 
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
@@ -12,6 +12,7 @@
   require_once("common.php");
 
   echo $jbs_pretext;
+  echo "\n<!-- configs loaded, start blog parse code -->\n\n"; // output some debug info to html comment
  
   if ($refer_log)
   {
@@ -114,7 +115,7 @@
       echo "<br>";
     }
 	
-    echo "<table border=0 width=\"100%\">";
+    echo "\n<table border=0 width=\"100%\">\n";
  
     
     if ($searchstr != "")
@@ -251,7 +252,7 @@
        "<input class=myform name=\"search_comments\" type=\"checkbox\" value=\"1\" " . ($search_comments ? "checked" : "") . ">Search comments" .
        " - <input class=myform name=\"search_tags\" type=\"checkbox\" value=\"0\" " . ($search_tags ? "" : "checked") . ">Ignore HTML tags" .
        "</form>$nav_searchfmt_end";
-  if (!($jbs_outer_table===false)) echo "</td></tr></table></center>";
+  if (!($jbs_outer_table===false)) echo "\n</td>\n</tr>\n</table>\n\n";
 
   echo $jbs_bottomline;
 

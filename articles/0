@@ -1,8 +1,8 @@
-Jan 13 2011
+Jul 08 2011
 
 \hello from jbs
 
-jamba blog script v0.2.1
+jrobb blog script v0.3.0
 
 jbs is a simplistic,fully hackable and customizable php blog script
 <br>by Jon Robbins (based on <a href="http://www.cockos.com/hl--/">hl--</a>, which was based on <a href="http://badmofo.org/hlscript/">hlscript</a>)
@@ -11,31 +11,31 @@ jbs is a simplistic,fully hackable and customizable php blog script
 this is <a href="?article=license">free software</a> : share, adapt, and enjoy!
 
 <b>Features:</b>
-<ul>
-  <li>minimal: everything configurable by editing plain text files.</li>
-  <li>easy to install and maintain</li>
-  <li>Article/comment search</li>
-  <li>Comments: Optional visitor-added comments support, with captcha to help prevent spam</li>
-  <li>Comments email notifications (optional)</li>
-  <li>Article and comment Tagging, for easy sorting and searching</li>
-  <li>Future posting: You can optionally withhold publishing of articles until their specified publication date.</li>
-  <li>RSS: Automatically generated RSS feed script</li>
-  <li>referrer logging</li>
-  <li>Only requires a new-ish version of <a href="http://php.net">PHP</a>--NO MySQL db required!</li>
-  <li>fully customizable, however you want to hack into it!</li>
-</ul>
+[list]
+  * minimal: everything configurable by editing plain text files.
+  * easy to install and maintain
+  * Article/comment search
+  * Comments: Optional visitor-added comments support, with captcha to help prevent spam
+  * Comments email notifications (optional)
+  * Article and comment Tagging, for easy sorting and searching
+  * Future posting: You can optionally withhold publishing of articles until their specified publication date.
+  * RSS: Automatically generated RSS feed script
+  * referrer logging
+  * Only requires a new-ish version of <a href="http://php.net">PHP</a>--NO MySQL db required!
+  * fully customizable, however you want to hack into it!
+[/list]
 
 
 <b>Article posting:</b>
-<ul>
-  <li>Articles are plain text files located within the articles/ directory. Articles are named only numbers (from 0 to ... infinity?), and are displayed up until the number contained in the file artile.top</li>
-  <li>If a date is in the future, but the file number < the number in article.top, the file will not be displayed.</li>
-  <li>This file is "0", to have another entry, I could make it "1" but to display that file I would have to increment the number in article.top to be "1"</li>
-  <li>Additional articles can be created named thing other than numbers, and while they can be linked to, they will not appear in the blog list (ie. the <a href="?article=license">license</a>)</li>
-</ul>
+[list]
+  Articles are plain text files located within the articles/ directory. Articles are named only numbers (from 0 to ... infinity?), and are displayed up until the number contained in the file artile.top
+  If a date is in the future, but the file number < the number in article.top, the file will not be displayed.
+  This file is "0", to have another entry, I could make it "1" but to display that file I would have to increment the number in article.top to be "1"
+  Additional articles can be created named thing other than numbers, and while they can be linked to, they will not appear in the blog list (ie. the <a href="?article=license">license</a>)
+[/list]
 
 <b>Article formatting</b><br>
-<ul>
+[list]
   <li>Articles are just normal text files, and can be edited with nano, vim, or Geany--whatever kind of text editor you like to use. </li>
   <li>This is a key benefit of jbs, in that an admin can SSH into the server and just use nano or vim to create/edit posts</li>
   <li>The first line in a file is the dateline. This is where you will usually put the date, or some kind of marker. (See 'today' above.)</li>
@@ -44,27 +44,28 @@ this is <a href="?article=license">free software</a> : share, adapt, and enjoy!
   <li>Blank lines are automatically spaced out with < P ></li>
   <li>bracketed code tags to display html and other code</li>
   <li>see this file ("0") or the <a href="?article=1">next ("1")</a> for an example</li>
-</ul>
+[/list]
 
 
 <b>Files</b>
-<ul>
+[list]
   <li>config.php The site-specific config. Edit this file!</li>
   <li>article.top This is a text file containing the filename number to make the top article. i.e. if articles/0 through 47 exist, this file should contain the string "47". You must update this when you create a new article and you want it to be the first displayed article. </li>
   <li>index.php the front page, with the bloggy-style article list.   </li>
   <li>rss.php Autogenerates an RSS feed for your site</li>
-</ul>
+[/list]
      
 <b>Tags:</b>
-<ul>
+[list]
   <li>#Tags can be anywhere, like this</li>
   <li>Or you can lay them out at the end of a post (see below)</li>
   <li>All tags can be displayed in on the <a href="tags.php">Tags page</a></li>
-</ul>
+[/list]
 
+[html]
 <center>
-<a class="FlattrButton" style="display:none;"
-href="http://jbs.jrobb.org"></a>
+<a class="FlattrButton" style="display:none;"href="http://jbs.jrobb.org"></a>
 </center>
+[/html]
 
 Tags: #tags #site #jbs #php

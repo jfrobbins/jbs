@@ -1,6 +1,6 @@
 <?
-/*  jbs (jamba blog script) 
- *  v0.2.1
+/*  jbs (jrobb blog script) 
+ *  v0.3.0
  * 
  *  Copyright (C) 2011 Jon Robbins and others
  *  http://jbs.jrobb.org
@@ -15,7 +15,7 @@
   //********************************************************
   //*** basic configuration
   //********************************************************
-    $blogname = "jamba blog script (jbs)";
+    $blogname = "jrobb blog script (jbs)";
     $mainPage="http://jbs.jrobb.org/";
     //$blogurl = $mainPage . "blog/";   // URL to main page  //for blog at "mysite/blog"
     $blogurl = $mainPage;   // URL to main page  //for blog at "mysite/"
@@ -88,7 +88,8 @@
   //*** appearance configuration
   //********************************************************
     $jbs_bodyconfig='bgcolor="#6F6F6F" text="#000000" link="#030EA2" alink="#0C36FC" vlink="#0011E6"'; // any custom color settings for the <body> tag
-
+																										//comment out if using CSS for body config
+	
     $center_article = 0;	// whether to <center> articles
     $jbs_article_date_column_width = "95"; // width of left "date" column, can be in pixels, or percentage i.e. 10%
 
@@ -96,7 +97,7 @@
     $jbs_formconfig =
        '<style type="text/css"> .myform { border-top:#c0c0c0 solid thin; border-bottom:#c0c0c0 solid thin; ' .
        'border-right:#c0c0c0 solid thin; border-left:#c0c0c0 solid thin; color:#f0f0f0; ' .
-       'background:#303040; font-family:Courier; font-size:12px; border-width:1px; } </style>';
+       'background:#303040; font-family:Courier; font-size:12px; border-width:1px; } </style>' . "\n";
     //I'm going to add some more stuff for a flattr button:
     $jbs_formconfig .= "\n" . '<script type="text/javascript">
                                 /* <![CDATA[ */
@@ -108,25 +109,25 @@
                                         t.parentNode.insertBefore(s, t);
                                     })();
                                 /* ]]> */
-                                </script>';
+                                </script>' . "\n";
 
   //browser icon:
-    $faviconPath="http://jrobb.org/images/favicon.ico"; //default is 16x16
+    $faviconPath="http://jrobb.org/images/favicon.ico"; //size is 16x16
                                                         //set to "" to not use
     if (!($faviconPath=="")) {
     //you can leave this alone unless you need to customize it:      
-      $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . $faviconPath .'" sizes="16x16" /> 
-                <link rel="icon" type="image/x-icon" href="' . $faviconPath .'" sizes="16x16" />';
+      $favicon = '<link rel="shortcut icon" type="image/x-icon" href="' . $faviconPath .'" > 
+                <link rel="icon" type="image/x-icon" href="' . $faviconPath .'" >';
     } else {
       $favicon ="";
     }
 
   // outer (border) table configuration -- set to false to disable border
-    $jbs_outer_table = 'border=0 CELLPADDING=4 CELLSPACING=0 HEIGHT=90% WIDTH=90% bgcolor="#A8A8A8" bordercolor="#000000"';
+    $jbs_outer_table = 'class="main"';
 
   // set our text that goes above the blog    
-    $jbs_topline = "<center><a class='top' href=\"$blogurl\">$blogname</a></center>";
-    $jbs_topline = '<div id="top"><b><font class="tophdr">' . $jbs_topline . '</font></b></div>';
+    $jbs_topline = "<a class='top' href=\"$blogurl\">$blogname</a>";
+    $jbs_topline = "\n" . '<div id="top"><b><font class="tophdr">' . $jbs_topline . '</font></b></div>' . "\n";
     
   //this is a quote or tagline that goes under the main heading:
     $jbs_tagline = '<font size=2 color="#000066">jbs is a simple, fully hackable, and customizable blogging system</font>';
@@ -225,26 +226,32 @@
                           "HREF=\"$blogurl_rel" . "recent_comments.php?rss=y\" TYPE=\"application/rss+xml\">";
 
   //some customization/format for the top
-    $jbs_topline .= "<table width=90% align='center'><tr><td valign=bottom align=right>";
+    $jbs_topline .= '<table class="innermain"><tr><td>' . "\n";
     $jbs_topline .= $jbs_tagline;
-    $jbs_topline .= "</td></tr></table>";
+    $jbs_topline .= "\n</td></tr></table>";
 
-    $jbs_pretext = "<head><title>$blogname</title>$jbs_formconfig $favicon\n";
+    //opening tags and meta information (header)
+    //jbs_pretext
+    $jbs_pretext = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">' . "\n";
+	$jbs_pretext .= '<html lang="en-US">' . "\n";
+	$jbs_pretext .= '<head>' . "\n";
+    $jbs_pretext .= '<meta content="text/html; charset=utf-8" http-equiv="Content-Type">' . "\n";
+    $jbs_pretext .= "<title>$blogname</title> \n $jbs_formconfig \n $favicon\n";
     if ($styleSheet != "")
-      $jbs_pretext .= '<link rel="stylesheet" type="text/css" href="' . $styleSheet . '" />' . "\n";
-    $jbs_pretext .= "</head>\n <body $jbs_bodyconfig>\n$rss_embedlinkrel\n$jbs_topline\n";
+      $jbs_pretext .= '<link rel="stylesheet" type="text/css" href="' . $styleSheet . '" >' . "\n";
+    $jbs_pretext .= "\n$rss_embedlinkrel\n";
+    $jbs_pretext .= "</head>\n <body $jbs_bodyconfig>\n$jbs_topline\n";
     
     if (!($jbs_outer_table === false)){
-      $jbs_pretext .= "<center><table $jbs_outer_table><tr>";
+      $jbs_pretext .= "<table $jbs_outer_table><tr>";
+      
+      //add menu formatting if menu file is included:
       if (!($menuFile===false)) {
-        $jbs_pretext .= '<td valign="top" width=17% cellpadding=0><table width=100% cellpadding=0 valign="top">
-                <tr valign="top">';
-        $jbs_pretext .= '<td width=100% align="left" valign="top" bgcolor=#CCCCCC>' . "\n<h2>Menu:</h2>" . "\n";
+        $jbs_pretext .= '<td class="menuouter" valign="top">' . "\n"; 
+        $jbs_pretext .= '<table class="menu">' . "\n" . '<tr valign="top">';
+        $jbs_pretext .= '<td>' . "\n<h2>Menu:</h2>" . "\n";
         $jbs_pretext .= filegetcontents($menuFile); 
-        $jbs_pretext .= '</td>
-                </tr>
-                <tr bgcolor="#6F6F6F"></tr>
-               </table></td>';
+        $jbs_pretext .= "</td>\n</tr>\n</table>\n</td>\n";
       }
       $jbs_pretext .= "<td valign=top>\n";	  
     }
