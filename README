@@ -10,3 +10,12 @@ BBcode type syntax is somewhat supported:
 
 Jon
 http://jrobb.org
+
+Here's a wordpress XML-to-html converter, written in PureBasic that I made to convert my posts to JBS:
+https://github.com/jfrobbins/wordpress-xml-to-html-converter-PB
+
+
+2013.04.14:
+I've since migrated my blog to Octopress ( http://octopress.org/ ), so I've started working on a script to migrate my old jbs posts into octopress type format.
+The formats are very similar, so it is very straightforward:
+https://github.com/jfrobbins/jbs-to-octopress
